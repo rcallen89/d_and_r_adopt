@@ -2,24 +2,24 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor to a shelters pets index page', type: :feature do
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
-    @shelter2 = Shelter.create!(name: "Jane's Shelter", address: "321 2nd St.", city: "Denver", state: "CO", zip: "80020")
+    @shelter1 = create(:shelter)
+    @shelter2 = create(:shelter, name: "Jane's Shelter", address: "321 2nd St.", city: "Denver", state: "CO", zip: "80020")
 
-    @pet1 = @shelter1.pets.create!(name: "Tron",
-                       image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg",
-                       approximate_age: 3,
-                       sex: "Male",
-                       description: 'Too Cool for School')
-    @pet2 = @shelter1.pets.create!(name: "Kat",
-                      image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg",
-                      approximate_age: 2,
-                      sex: "Female",
-                      description: 'Too Cool for School')
-    @pet3 = @shelter2.pets.create!(name: "Peppo",
-                       image: "https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg",
-                       approximate_age: 5,
-                       sex: "Male",
-                       description: 'Too Cool for School')
+    @pet1 = create(:pet, shelter: @shelter1)
+    @pet2 = create(:pet,
+                  name: "Kat",
+                  image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg",
+                  approximate_age: 2,
+                  sex: "Female",
+                  description: 'Too Cool for School',
+                  shelter: @shelter1)
+    @pet3 = create(:pet,
+                  name: "Peppo",
+                  image: "https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg",
+                  approximate_age: 5,
+                  sex: "Male",
+                  description: 'Too Cool for School',
+                  shelter: @shelter2)
     
     visit "/shelters/#{@shelter1.id}/pets"
   end
