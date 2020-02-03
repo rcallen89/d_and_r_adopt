@@ -1,0 +1,17 @@
+<main class="pets-sec">
+  <h2>List of All Pets</h2>
+  <section class="pets-sec">
+    <% @pets.each do |pet| %>
+      <article class="pets-<%= pet.id %> pets">
+        <h3><%= link_to pet.name, "/pets/#{pet.id}" %></h3>
+        <%= image_tag(pet.image, size: "120") %>
+        <p>Age: <%= pet.approximate_age %></p>
+        <p>Sex: <%= pet.sex %></p>
+        <p>Shelter: <%= link_to pet.shelter.name, "/shelters/#{pet.shelter.id}" %></p>
+
+        <%= link_to "Update Pet", "/pets/#{pet.id}/edit"%>
+        <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
+      </article>
+    <% end %>
+  </section>
+</main>
