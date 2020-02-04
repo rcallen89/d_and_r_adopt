@@ -3,15 +3,16 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
 
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
-    @pet1 = @shelter1.pets.create!(name: "Tron",
-    approximate_age: 3,
-    sex: "Male",
-    description: 'Too Cool for School')
-    @pet2 = @shelter1.pets.create!(name: "Kat",
-    approximate_age: 2,
-    sex: "Female",
-    description: 'Too Cool for School')
+    @shelter1 = create(:shelter)
+
+    @pet1 = create(:pet, shelter: @shelter1)
+
+    @pet2 = create(:pet, 
+                    name: "Kat",
+                    approximate_age: 2,
+                    sex: "Female",
+                    description: 'Too Cool for School',
+                    shelter: @shelter1)
     
     visit '/pets'
   end

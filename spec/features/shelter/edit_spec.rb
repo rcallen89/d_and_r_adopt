@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor of a shelter show page' do
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
+    @shelter1 = create(:shelter)
   end
 
   it 'should update individual shelter information' do

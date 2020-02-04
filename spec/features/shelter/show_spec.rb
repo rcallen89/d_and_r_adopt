@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor of a shelter show page' do
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
-    @shelter2 = Shelter.create!(name: "Jane's Shelter", address: "321 2nd St.", city: "Denver", state: "CO", zip: "80020")
+    @shelter1 = create(:shelter)
+    @shelter2 = create(:shelter, name: "Jane's Shelter", address: "321 2nd St.", city: "Denver", state: "CO", zip: "80020")
   end
 
   it 'should show the individual shelter show page' do

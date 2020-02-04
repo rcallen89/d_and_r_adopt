@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor to a shelters pets index page', type: :feature do
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
+    @shelter1 = create(:shelter)
   end
 
   it 'should let me create new pet' do

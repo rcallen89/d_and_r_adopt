@@ -2,13 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor to a pets show page', type: :feature do
   before(:each) do
-    @shelter1 = Shelter.create!(name: "Joe's Shelter", address: "123 Main St.", city: "Dallas", state: "TX", zip: "75341")
+    @shelter1 = create(:shelter)
 
-    @pet1 = @shelter1.pets.create!(name: "Tron",
-                       image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg",
-                       approximate_age: 3,
-                       sex: "Male",
-                       description: 'Too Cool for School')
+    @pet1 = create(:pet, shelter: @shelter1)
   end
 
   it 'should update a pets information' do
