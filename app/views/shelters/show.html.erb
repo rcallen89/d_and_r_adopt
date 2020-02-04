@@ -5,3 +5,14 @@
   <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit" %>
   <%= link_to "Delete Shelter", "/shelters/#{@shelter.id}/", method: :delete %>
 </main>
+
+<section class='shelter-reviews'>
+  <% @shelter.reviews.each do |review| %>
+    <article class="review-<%= review.id %>">
+    <h3><%= review.title %></h3>
+    <%= image_tag(review.image, size: "120") %>
+    <p>Rating: <%= review.rating %> </p>
+    <p>Comments: <%= review.content %></p>
+    </article>
+  <% end %>
+</section>

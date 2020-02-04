@@ -4,6 +4,8 @@ RSpec.describe 'As a visitor of a shelter show page' do
   before(:each) do
     @shelter1 = create(:shelter)
     @shelter2 = create(:shelter, name: "Jane's Shelter", address: "321 2nd St.", city: "Denver", state: "CO", zip: "80020")
+    @review1 = create(:review, shelter: @shelter1)
+    @review2 = create(:review, title: "Shelter 2 Review", shelter: @shelter2)
   end
 
   it 'should show the individual shelter show page' do
@@ -23,5 +25,16 @@ RSpec.describe 'As a visitor of a shelter show page' do
     click_on "Shelter's Pets"
 
     expect(current_path).to eq("/shelters/#{@shelter2.id}/pets")
+  end
+
+  it 'should show that shelters reviews' do
+    visit "shelters/#{@shelter1.id}"
+    save_and_open_page
+    expect(page).to have_content(@review1.title)
+    expect(page).to have_content(@review1.rating)
+    expect(page).to have_content(@review1.content)
+    expect(page).to have_css("img[src*='#{@review1.image}']")
+
+    expect(page).to_not have_content(@review2.title)
   end
 end
