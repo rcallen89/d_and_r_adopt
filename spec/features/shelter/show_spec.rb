@@ -29,12 +29,40 @@ RSpec.describe 'As a visitor of a shelter show page' do
 
   it 'should show that shelters reviews' do
     visit "shelters/#{@shelter1.id}"
-    save_and_open_page
+    
     expect(page).to have_content(@review1.title)
     expect(page).to have_content(@review1.rating)
     expect(page).to have_content(@review1.content)
     expect(page).to have_css("img[src*='#{@review1.image}']")
 
     expect(page).to_not have_content(@review2.title)
+  end
+
+  it 'should show a link to create a review for the shelter' do
+    visit "shelters/#{@shelter1.id}"
+
+    click_on "Create Review"
+
+    expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
+
+    fill_in "title", with: "New Review 1"
+    fill_in "rating", with: "5"
+    fill_in "content", with: "Lovely Pet Shelter"
+
+    expect(page).to have_field("image")
+
+    click_on "Submit Review"
+
+    expect(current_path).to eq("/shelters/#{@shelter1.id}")
+    
+    # Test original review still there
+    expect(page).to have_content(@review1.title)
+    expect(page).to have_content(@review1.rating)
+    expect(page).to have_content(@review1.content)
+    expect(page).to have_css("img[src*='#{@review1.image}']")
+
+    expect(page).to have_content("New Review 1")
+    expect(page).to have_content("5")
+    expect(page).to have_content("Lovely Pet Shelter")
   end
 end

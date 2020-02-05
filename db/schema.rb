@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200204192422) do
+ActiveRecord::Schema.define(version: 20200205035243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20200204192422) do
     t.string "title"
     t.integer "rating"
     t.text "content"
-    t.string "image", default: "https://sagemailer.com/blog/content/images/2019/12/Amazon-review-request-button.jpg"
     t.bigint "shelter_id"
+    t.string "image", default: "https://sagemailer.com/blog/content/images/2019/12/Amazon-review-request-button.jpg"
     t.index ["shelter_id"], name: "index_reviews_on_shelter_id"
   end
 
