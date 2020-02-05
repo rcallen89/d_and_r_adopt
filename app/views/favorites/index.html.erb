@@ -1,0 +1,14 @@
+<h2>List of Your Favorited Pets</h2>
+
+<% if fav_count == 0 %>
+  <h3>You currently do not have any favorites</h3>
+<% else %>
+  <main>
+    <% @favs.each do |pet|%>
+      <article id="fav-<%= pet.id %>">
+        <%= image_tag(pet.image, size: "400")%>
+        <h2><%= link_to pet.name, "/pets/#{pet.id}" %></h2>
+      </article>
+    <% end %>
+  </main>
+<% end %>
