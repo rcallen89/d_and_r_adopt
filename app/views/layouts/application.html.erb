@@ -16,6 +16,11 @@
         <%= button_to "Favorites: #{fav_count}", "/favorites", method: :get, class: "nav-btn" %>
       </nav>
     </header>
+    <% flash.each do |name, msg| %>
+      <div class= "<%=name%>-flash">
+        <p><%= msg %></p>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
