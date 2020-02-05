@@ -15,6 +15,13 @@
         <%= button_to "Pets", "/pets", method: :get, class: "nav-btn" %>
       </nav>
     </header>
+
+    <section class="flash-errors">
+      <% flash.each do |type, message| %>
+        <p><h2><%= message %></h2></p>
+      <% end %>
+    </section>
+
     <%= yield %>
   </body>
 </html>
