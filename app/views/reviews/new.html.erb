@@ -1,0 +1,18 @@
+<h2> Create New Review</h2>
+<main>
+<%= form_tag "/shelters/#{@shelter.id}/reviews", class: "form" do %>
+  <%= label_tag :title %>
+  <%= text_field_tag :title %>
+
+  <%= label_tag :rating %>
+  <%= number_field_tag(:rating, nil, in: 1..5, step: 1) %>
+
+  <%= label_tag :content %>
+ <%= text_area_tag :content, nil, size: "25x10" %>
+
+  <%= label_tag :image %>
+  <%= text_field_tag :image %>
+
+  <%= submit_tag "Submit Review", class: "form-btn" %>
+<% end %>
+</main>
