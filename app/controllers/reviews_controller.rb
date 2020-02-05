@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
 
   def create
     @shelter = Shelter.find(params[:shelter_id])
-    params.delete_if {|params, value| value.blank?}
+
+    params.delete :image if ( (params[:image].blank? || has_asset?(params[:image])) )
     review = Review.new(review_params)
     if review.save
       redirect_to "/shelters/#{params[:shelter_id]}"
@@ -22,6 +23,8 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:review_id])
+
+    params.delete :image if ( (params[:image].blank? || has_asset?(params[:image])) )
 
     if @review.update(review_params)
       redirect_to "/shelters/#{params[:shelter_id]}"
@@ -40,6 +43,10 @@ class ReviewsController < ApplicationController
 
     def review_params
       params.permit(:title, :rating, :content, :image, :shelter_id)
+    end
+
+    def has_asset?(image)
+      Rails.application.assets.find_asset(image) == nil
     end
 
 end

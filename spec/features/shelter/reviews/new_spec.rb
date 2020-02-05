@@ -57,5 +57,30 @@ RSpec.describe 'Shelter Review Functions', type: :feature do
       expect(page).to have_content("Please fill in Title, Rating, and Content first!")
       expect(page).to have_button("Submit Review")
     end
+
+    it 'should display default image if image field wont return image' do
+      visit "shelters/#{@shelter1.id}"
+
+      click_on "Create Review"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
+
+      fill_in "title", with: "New Review 1"
+      fill_in "rating", with: "5"
+      fill_in "content", with: "Lovely Pet Shelter"
+      fill_in "image", with: "test"
+
+      click_on "Submit Review"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}")
+      
+      # Test original review still there
+      within ".review-#{@shelter1.reviews.last.id}" do
+        expect(page).to have_content("New Review 1")
+        expect(page).to have_content("5")
+        expect(page).to have_content("Lovely Pet Shelter")
+        expect(page).to have_css("img[src*='https://sagemailer.com/blog/content/images/2019/12/Amazon-review-request-button.jpg']")
+      end
+    end
   end
 end

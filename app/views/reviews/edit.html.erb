@@ -8,7 +8,7 @@
   <%= number_field_tag(:rating, @review.rating, in: 1..5, step: 1) %>
 
   <%= label_tag :content %>
-  <%= text_field_tag :content, @review.content %>
+  <%= text_area_tag :content, @review.content, size: "25x10" %>
 
   <%= label_tag :image %>
   <%= text_field_tag :image, @review.image %>
