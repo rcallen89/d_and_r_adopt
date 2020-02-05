@@ -9,5 +9,6 @@
 
   <%= link_to "Update Pet", "/pets/#{@pet.id}/edit"%>
   <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>
+  <%= link_to "Favorite Pet", "/favorites/#{@pet.id}", method: :post %>
   </section>
 </main>

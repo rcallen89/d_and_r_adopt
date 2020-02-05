@@ -25,6 +25,7 @@ RSpec.describe 'As a visitor', type: :feature do
     expect(page).to have_content(@pet1.adoptable)
     expect(page).to have_link("Update Pet")
     expect(page).to have_link("Delete Pet")
+    expect(page).to have_link("Favorite Pet")
 
     expect(page).to_not have_content(@pet2.name)
     expect(page).to_not have_content(@pet2.approximate_age)
