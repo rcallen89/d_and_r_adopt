@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  def add_pet
+  def create
     if session[:favorites] && session[:favorites][params[:id].to_s]
       flash[:error] = "Pet Already Favorited"
     elsif session[:favorites]
