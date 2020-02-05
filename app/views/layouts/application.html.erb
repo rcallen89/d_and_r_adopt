@@ -13,7 +13,7 @@
       <nav>
         <%= button_to "Shelters", "/shelters", method: :get, class: "nav-btn" %>
         <%= button_to "Pets", "/pets", method: :get, class: "nav-btn" %>
-        <%= button_to "Favorites: #{fav_count}", "/pets", method: :get, class: "nav-btn" %>
+        <%= button_to "Favorites: #{fav_count}", "/favorites", method: :get, class: "nav-btn" %>
       </nav>
     </header>
     <%= yield %>
