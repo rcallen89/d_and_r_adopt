@@ -14,4 +14,15 @@ RSpec.describe 'As a visitor', type: :feature do
 
     expect(current_path).to eq("/pets")
   end
+
+  it 'should show amount of favorites as 0 when there are no favorites' do
+    visit '/shelters'
+    within "nav" do
+      expect(page).to have_button("Favorites: 0")
+    end
+    visit '/pets'
+    within "nav" do
+      expect(page).to have_button("Favorites: 0")
+    end
+  end
 end
