@@ -47,4 +47,25 @@ RSpec.describe "A new form for adoption" do
 
     expect(page).to have_css("#fav-#{@pet2.id}")
   end
+
+  it 'can see flash message if form not filled out' do
+    visit '/adopt_forms/new'
+
+    check "#{@pet2.name}"
+
+    fill_in "name", with: "Sally"
+    fill_in "address", with: ""
+    fill_in "city", with: "Denver"
+    fill_in "state", with: "CO"
+    fill_in "zip", with: "80222"
+    fill_in "phone_number", with: "303-111-1234"
+    fill_in "description", with: "I would be a great pet parent"
+
+    click_on "Submit Application"
+
+    expect(current_path).to eq("/adopt_forms")
+    
+    expect(page).to have_content("Form Not Complete Try Again")
+    
+  end
 end

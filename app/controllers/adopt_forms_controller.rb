@@ -7,7 +7,6 @@ class AdoptFormsController < ApplicationController
   def create
     params[:pets][:pet_id].delete_if {|id| id.blank? }
     form = AdoptForm.new(adopt_form_parms)
-
     if form.save
       pet_ids = params[:pets][:pet_id]
       pets_objects = Pet.find(params[:pets][:pet_id])
@@ -16,6 +15,7 @@ class AdoptFormsController < ApplicationController
       flash[:notice] = "Application Submitted"
       redirect_to '/favorites'
     else
+      @favorites = session[:favorites]
       flash[:error] = "Form Not Complete Try Again"
       render :new
     end
