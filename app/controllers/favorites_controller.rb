@@ -21,11 +21,7 @@ class FavoritesController < ApplicationController
   def destroy
     session[:favorites].delete(params[:id])
     flash[:success] = "Pet Removed from Favorites"
-    if params[:fav]
-      redirect_to '/favorites'
-    else
-      redirect_to "/pets/#{params[:id]}"
-    end
+    redirect_back(fallback_location: '/favorites')
   end
 
   def destroy_all
