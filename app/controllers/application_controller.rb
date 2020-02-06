@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :fav_count, :in_favs
+  helper_method :fav_count, :in_favs, :favs
+
+  def favs
+      @favs ||= Pet.find(session[:favorites].keys)
+  end
 
   def fav_count
     if session[:favorites]
