@@ -7,7 +7,6 @@ ruby-version
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-coverage
 /log/*
 /tmp/*
 !/log/.keep
