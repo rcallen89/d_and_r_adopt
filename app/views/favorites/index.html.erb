@@ -5,6 +5,7 @@
 <% else %>
   <main>
     <%= link_to "Remove All Favorited Pets", "/favorites", method: :delete %>
+    <%= link_to "New Application", "/adopt_forms/new" %>
     <% @favs.each do |pet|%>
       <article id="fav-<%= pet.id %>">
         <%= image_tag(pet.image, size: "400")%>

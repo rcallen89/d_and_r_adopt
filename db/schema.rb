@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200205035243) do
+ActiveRecord::Schema.define(version: 20200206214617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adopt_forms", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "phone_number"
+    t.string "description"
+  end
+
+  create_table "pet_adopt_forms", force: :cascade do |t|
+    t.bigint "pet_id"
+    t.bigint "adopt_form_id"
+    t.index ["adopt_form_id"], name: "index_pet_adopt_forms_on_adopt_form_id"
+    t.index ["pet_id"], name: "index_pet_adopt_forms_on_pet_id"
+  end
 
   create_table "pets", force: :cascade do |t|
     t.string "name"
