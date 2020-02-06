@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Favorites PORO', method: :feature do
+RSpec.describe 'As a visitor to the favorites page', method: :feature do
   before(:each) do
     @shelter1 = create(:shelter)
 
@@ -32,16 +32,16 @@ RSpec.describe 'Favorites PORO', method: :feature do
     end
   end
 
-  it 'should be able to add a pet to favorites' do
+  it 'should not be able to add a pet to favorites again' do
     visit "/pets/#{@pet1.id}"
     click_on "Favorite Pet"
     within "nav" do
       expect(page).to have_button("Favorites: 1")
     end
     expect(current_path).to eq("/pets/#{@pet1.id}")
-    click_on "Favorite Pet"
 
-    expect(page).to have_content("Pet Already Favorited")
+    expect(page).to have_link("Unfavorite Pet")
+    expect(page).to_not have_link("Favorite Pet")
   end
 
 end

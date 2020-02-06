@@ -9,6 +9,10 @@
 
   <%= link_to "Update Pet", "/pets/#{@pet.id}/edit"%>
   <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>
-  <%= link_to "Favorite Pet", "/favorites/#{@pet.id}", method: :post %>
+  <% if in_favs(@pet.id) %>
+    <%= link_to "Unfavorite Pet", "/favorites/#{@pet.id}", method: :delete %>
+  <% else %>
+    <%= link_to "Favorite Pet", "/favorites/#{@pet.id}", method: :post %>
+  <% end %>
   </section>
 </main>

@@ -4,10 +4,12 @@
   <h3>You currently do not have any favorites</h3>
 <% else %>
   <main>
+    <%= link_to "Remove All Favorited Pets", "/favorites", method: :delete %>
     <% @favs.each do |pet|%>
       <article id="fav-<%= pet.id %>">
         <%= image_tag(pet.image, size: "400")%>
         <h2><%= link_to pet.name, "/pets/#{pet.id}" %></h2>
+        <%= link_to "Unfavorite Pet", "/favorites/#{pet.id}/fav", method: :delete %>
       </article>
     <% end %>
   </main>
