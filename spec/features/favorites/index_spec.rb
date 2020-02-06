@@ -39,6 +39,7 @@ RSpec.describe 'As a visitor to favorites index', method: :feature do
     within "#fav-#{@pet1.id}" do
       expect(page).to have_link(@pet1.name)
       expect(page).to have_css("img[src*='#{@pet1.image}']")
+      expect(page).to have_link("Unfavorite Pet")
 
       expect(page).to_not have_link(@pet2.name)
     end
@@ -46,6 +47,7 @@ RSpec.describe 'As a visitor to favorites index', method: :feature do
     within "#fav-#{@pet2.id}" do
       expect(page).to have_link(@pet2.name)
       expect(page).to have_css("img[src*='#{@pet2.image}']")
+      expect(page).to have_link("Unfavorite Pet")
 
       expect(page).to_not have_link(@pet1.name)
     end
