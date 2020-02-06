@@ -1,4 +1,11 @@
 class FavoritesController < ApplicationController
+  def index
+    if session[:favorites]
+      @favs = Pet.find(session[:favorites].keys)
+    else
+    end
+  end
+
   def create
     if session[:favorites] && session[:favorites][params[:id].to_s]
       flash[:error] = "Pet Already Favorited"

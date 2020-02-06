@@ -31,4 +31,17 @@ RSpec.describe 'Favorites PORO', method: :feature do
       expect(page).to have_button("Favorites: 2")
     end
   end
+
+  it 'should be able to add a pet to favorites' do
+    visit "/pets/#{@pet1.id}"
+    click_on "Favorite Pet"
+    within "nav" do
+      expect(page).to have_button("Favorites: 1")
+    end
+    expect(current_path).to eq("/pets/#{@pet1.id}")
+    click_on "Favorite Pet"
+
+    expect(page).to have_content("Pet Already Favorited")
+  end
+
 end

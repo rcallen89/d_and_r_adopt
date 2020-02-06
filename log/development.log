@@ -1,0 +1,164 @@
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (221.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "adopt_dont_shop_development"[0m
+  [1m[35m (228.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "adopt_dont_shop_test"[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5022504912090105405)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateShelters (20200128161030)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.9ms)[0m  [1m[35mCREATE TABLE "shelters" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "zip" character varying)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200128161030"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePets (20200129165311)
+  [1m[35m (39.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "pets" ("id" bigserial primary key, "name" character varying, "image" character varying DEFAULT 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg', "approximate_age" integer, "sex" character varying, "shelter_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_92fb5d7a05"
+FOREIGN KEY ("shelter_id")
+  REFERENCES "shelters" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_pets_on_shelter_id" ON "pets"  ("shelter_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200129165311"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDescriptionToPets (20200130202427)
+  [1m[35m (122.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "pets" ADD "description" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200130202427"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAdoptableToPets (20200130205420)
+  [1m[35m (3.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "pets" ADD "adoptable" integer DEFAULT 0[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200130205420"]]
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-03 19:19:03.098585"], ["updated_at", "2020-02-03 19:19:03.098585"]]
+  [1m[35m (25.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5022504912090105405)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-02-05 10:05:24 -0700
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/tronkat/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/tronkat/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb (3.2ms)
+Completed 200 OK in 19ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sheltes" for ::1 at 2020-02-05 10:05:35 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/sheltes"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.1.2) lib/rack/method_override.rb:24:in `call'
+rack (2.1.2) lib/rack/runtime.rb:24:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.1.2) lib/rack/sendfile.rb:113:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.2) lib/puma/configuration.rb:227:in `call'
+puma (3.12.2) lib/puma/server.rb:674:in `handle_request'
+puma (3.12.2) lib/puma/server.rb:476:in `process_client'
+puma (3.12.2) lib/puma/server.rb:334:in `block in run'
+puma (3.12.2) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/shelters" for ::1 at 2020-02-05 10:05:46 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (41.9ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (49.8ms)
+Completed 200 OK in 275ms (Views: 217.9ms | ActiveRecord: 46.8ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:05:51 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.2ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 19ms (Views: 14.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:12:39 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.2ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 26ms (Views: 21.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:12:40 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.2ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 27ms (Views: 22.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:23:41 -0700
+  [1m[35m (40.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.8ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 212ms (Views: 192.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:24:40 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.7ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (48.6ms)
+Completed 200 OK in 70ms (Views: 60.0ms | ActiveRecord: 7.9ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:36:47 -0700
+  [1m[35m (41.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.4ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 213ms (Views: 196.8ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/shelters" for ::1 at 2020-02-05 10:36:52 -0700
+Processing by SheltersController#index as HTML
+  Rendering shelters/index.html.erb within layouts/application
+  [1m[36mShelter Load (0.4ms)[0m  [1m[34mSELECT "shelters".* FROM "shelters"[0m
+  Rendered shelters/index.html.erb within layouts/application (20.2ms)
+Completed 200 OK in 41ms (Views: 24.4ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/pets" for ::1 at 2020-02-05 10:36:54 -0700
+Processing by PetsController#index as HTML
+  Rendering pets/index.html.erb within layouts/application
+  [1m[36mPet Load (44.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets"[0m
+  Rendered pets/index.html.erb within layouts/application (50.0ms)
+Completed 200 OK in 97ms (Views: 42.1ms | ActiveRecord: 46.5ms)
+
+
+Started GET "/pets" for ::1 at 2020-02-05 10:37:07 -0700
+Processing by PetsController#index as HTML
+  Rendering pets/index.html.erb within layouts/application
+  [1m[36mPet Load (1.9ms)[0m  [1m[34mSELECT "pets".* FROM "pets"[0m
+  Rendered pets/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 24ms (Views: 18.8ms | ActiveRecord: 1.9ms)
+
+
+  [1m[36mPet Load (1.1ms)[0m  [1m[34mSELECT  "pets".* FROM "pets" LIMIT $1[0m  [["LIMIT", 11]]
