@@ -14,5 +14,6 @@
   <% else %>
     <%= link_to "Favorite Pet", "/favorites/#{@pet.id}", method: :post %>
   <% end %>
+  <%= link_to 'Applications', "/pets/#{@pet.id}/adopt_forms" %>
   </section>
 </main>
