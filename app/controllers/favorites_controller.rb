@@ -1,9 +1,6 @@
 class FavoritesController < ApplicationController
   def index
-    if session[:favorites]
-      @favs = Pet.find(session[:favorites].keys)
-    else
-    end
+    @pet_adopt_forms = PetAdoptForm.all
   end
 
   def create

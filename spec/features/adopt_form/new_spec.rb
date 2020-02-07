@@ -43,8 +43,10 @@ RSpec.describe "A new form for adoption" do
     expect(current_path).to eq("/favorites")
     expect(page).to have_content("Application Submitted")
     
-    expect(page).not_to have_css("#fav-#{@pet1.id}")
-
+    within "#favorite-pets" do
+      expect(page).not_to have_css("#fav-#{@pet1.id}")
+    end
+    
     expect(page).to have_css("#fav-#{@pet2.id}")
   end
 

@@ -66,4 +66,15 @@ RSpec.describe 'As a visitor to favorites index', method: :feature do
     
     expect(page).to have_link("New Application")
   end
+
+  it 'shows a section of pets that apps out for them' do
+    create(:pet_adopt_form, pet: @pet1)
+
+    visit '/favorites'
+    
+    within "#pending-pets" do
+      expect(page).to have_link("#{@pet1.name}")
+    end
+
+  end
 end

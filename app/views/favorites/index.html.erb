@@ -4,14 +4,22 @@
   <h3>You currently do not have any favorites</h3>
 <% else %>
   <main>
+  <section id="favorite-pets">
     <%= link_to "Remove All Favorited Pets", "/favorites", method: :delete %>
     <%= link_to "New Application", "/adopt_forms/new" %>
-    <% @favs.each do |pet|%>
+    <% favs.each do |pet|%>
       <article id="fav-<%= pet.id %>">
         <%= image_tag(pet.image, size: "400")%>
         <h2><%= link_to pet.name, "/pets/#{pet.id}" %></h2>
         <%= link_to "Unfavorite Pet", "/favorites/#{pet.id}", method: :delete %>
       </article>
     <% end %>
+    </section>
   </main>
 <% end %>
+
+<section id="pending-pets">
+  <% @pet_adopt_forms.each do |form| %>
+    <%= link_to "#{form.pet.name}", "/pets/#{form.pet.id}" %>
+  <% end %>
+</section>
