@@ -40,4 +40,19 @@ RSpec.describe 'As a visitor', type: :feature do
 
     expect(current_path).to eq("/pets/#{@pet1.id}")
   end
+
+  it 'shows a link to view all this pets applications' do
+    @adopt_form = create(:adopt_form)
+    create(:pet_adopt_form, adopt_form: @adopt_form, pet: @pet1)
+
+    visit "/pets/#{@pet1.id}"
+
+    click_on "Applications"
+
+    expect(current_path).to eq("/pets/#{@pet1.id}/adopt_forms")
+
+    click_link "#{@adopt_form.name}'s Application"
+
+    expect(current_path).to eq("/adopt_forms/#{@adopt_form.id}")
+  end
 end

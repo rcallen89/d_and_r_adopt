@@ -1,18 +1,15 @@
 class FavoritesController < ApplicationController
   def index
-    if session[:favorites]
-      @favs = Pet.find(session[:favorites].keys)
-    else
-    end
+    @pet_adopt_forms = PetAdoptForm.all
   end
 
   def create
     if session[:favorites]
-      session[:favorites][params[:id].to_s] = 0;
+      session[:favorites][params[:id].to_s] = Pet.find(params[:id]).name;
       flash[:success] = "Pet added to Favorites"
     else
       session[:favorites] = {}
-      session[:favorites][params[:id].to_s] = 0;
+      session[:favorites][params[:id].to_s] = Pet.find(params[:id]).name;
       flash[:success] = "Pet added to Favorites"
     end
     redirect_to "/pets/#{params[:id]}"
