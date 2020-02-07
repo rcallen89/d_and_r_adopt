@@ -1,5 +1,13 @@
 class AdoptFormsController < ApplicationController
 
+  def index
+    @pet = Pet.find(params[:pet_id])
+  end
+
+  def show
+    @form = AdoptForm.find(params[:adopt_form_id])
+  end
+
   def new
     @favorites = session[:favorites]
   end

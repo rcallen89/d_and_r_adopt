@@ -1,0 +1,8 @@
+<h2>Applications for <%= @pet.name %></h2>
+
+
+<%= content_tag :ul do %>
+  <% @pet.adopt_forms.each do |form|%>
+    <%= link_to "#{form.name}'s Application", "/adopt_forms/#{form.id}" %>
+  <% end %>
+<% end %>
