@@ -5,5 +5,10 @@ class Pet < ApplicationRecord
   has_many :pet_adopt_forms
   has_many :adopt_forms, through: :pet_adopt_forms
 
-  enum adoptable: %w(Yes Pending No)
+  enum adoptable: %w(Available Pending Adopted)
+
+  def pending_form
+    AdoptForm.find(self.pending_app).name
+  end
+
 end

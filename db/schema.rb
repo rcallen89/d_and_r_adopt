@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20200206214617) do
     t.string "image", default: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg"
     t.integer "approximate_age"
     t.string "sex"
+    t.bigint "pending_app"
     t.bigint "shelter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

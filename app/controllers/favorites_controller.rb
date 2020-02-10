@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def index
-    @pet_adopt_forms = PetAdoptForm.all
+    @pet_adopt_forms = PetAdoptForm.select(:pet_id).distinct
   end
 
   def create

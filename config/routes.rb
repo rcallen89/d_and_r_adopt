@@ -35,5 +35,6 @@ Rails.application.routes.draw do
   get '/adopt_forms/new', to: "adopt_forms#new"
   post '/adopt_forms', to: "adopt_forms#create"
   get '/adopt_forms/:adopt_form_id', to: "adopt_forms#show"
+  patch '/adopt_forms/:adopt_form_id/pets/:pet_id', to: "pet_adopt_forms#update"
 
 end

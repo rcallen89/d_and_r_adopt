@@ -5,7 +5,10 @@
   <p>Description: <%= @pet.description %></p>
   <p>Age: <%= @pet.approximate_age %></p>
   <p>Sex: <%= @pet.sex %></p>
-  <p>Adoptable: <%= @pet.adoptable %></p>
+  <p>Status: <%= @pet.adoptable %></p>
+  <% if @pet.adoptable == "Pending" %>
+    <p>On hold for <%= @pet.pending_form %></p>
+  <% end %>
 
   <%= link_to "Update Pet", "/pets/#{@pet.id}/edit"%>
   <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>

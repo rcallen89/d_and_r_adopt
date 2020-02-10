@@ -15,7 +15,7 @@ class AdoptFormsController < ApplicationController
   def create
     params[:pets][:pet_id].delete_if {|id| id.blank? }
     form = AdoptForm.new(adopt_form_parms)
-    if form.save
+    if (form.save && !params[:pets][:pet_id].blank?)
       pet_ids = params[:pets][:pet_id]
       pets_objects = Pet.find(params[:pets][:pet_id])
       form.pets << pets_objects
@@ -28,6 +28,8 @@ class AdoptFormsController < ApplicationController
       render :new
     end
   end
+
+  
 
   private
 
