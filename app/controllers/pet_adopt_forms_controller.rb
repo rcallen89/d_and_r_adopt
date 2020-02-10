@@ -9,7 +9,9 @@ class PetAdoptFormsController < ApplicationController
       redirect_to "/pets/#{pet.id}"
     else
       pet.adoptable = "Available"
-      redirect_to "/pets/#{pet.id}"
+      pet.pending_app = ""
+      pet.save
+      redirect_to "/adopt_forms/#{params[:adopt_form_id]}"
     end
   end
 

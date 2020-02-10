@@ -7,7 +7,15 @@
 
 <%= content_tag :ul do %>
   <% @form.pets.each do |pet|%>
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-    <%= link_to "Approve Application for #{pet.name}", "/adopt_forms/#{@form.id}/pets/#{pet.id}", method: :patch%>
+    <section id="pet-<%= pet.id %>">
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <% if pet.adoptable == "Available" %>
+          <%= link_to "Approve Application for #{pet.name}", "/adopt_forms/#{@form.id}/pets/#{pet.id}", method: :patch%>
+      <% elsif pet.pending_app == @form.id %>
+          <%= link_to "Revoke Application for #{pet.name}", "/adopt_forms/#{@form.id}/pets/#{pet.id}", method: :patch%>
+      <% else %>
+        <%= "#{pet.name} already pending."%>
+      <% end %>
+    </section>
   <% end %>
 <% end %>
