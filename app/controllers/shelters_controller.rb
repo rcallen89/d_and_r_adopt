@@ -12,9 +12,13 @@ class SheltersController < ApplicationController
 
   def create
     shelter = Shelter.create(shelter_params)
-      if shelter.save
-        redirect_to '/shelters'
-      end
+    if shelter.save
+      flash[:notice] = "Shelter Created"
+      redirect_to '/shelters'
+    else
+      flash[:notice] = shelter.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def edit
@@ -22,14 +26,27 @@ class SheltersController < ApplicationController
   end
 
   def update
-    shelter = Shelter.find(params[:id])
-    shelter.update(shelter_params)
-    redirect_to "/shelters/#{shelter.id}"
+    @shelter = Shelter.find(params[:id])
+    if @shelter.update(shelter_params)
+      redirect_to "/shelters/#{@shelter.id}"
+    else
+      flash[:notice] = @shelter.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def destroy
-    Shelter.destroy(params[:id])
-    redirect_to '/shelters'
+    shelter = Shelter.find(params[:id])
+    if shelter.pets.any? {|pet| pet.adoptable == "Pending" }
+      flash[:notice] = "Can't Delete Shelter with Pending Pet Applications"
+      redirect_to "/shelters/#{params[:id]}"
+    else
+      shelter.pets.destroy_all
+      shelter.reviews.destroy_all
+      shelter.destroy
+      flash[:notice] = "Shelter Deleted"
+      redirect_to '/shelters'
+    end
   end
 
   private

@@ -52,7 +52,7 @@ RSpec.describe "A new form for adoption" do
 
   it 'can see flash message if form not filled out' do
     visit '/adopt_forms/new'
-
+    
     check "#{@pet2.name}"
 
     fill_in "name", with: "Sally"

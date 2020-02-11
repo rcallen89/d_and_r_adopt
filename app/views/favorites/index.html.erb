@@ -21,6 +21,6 @@
 <section id="pending-pets">
 <h3>Pet's with Applications</h3>
   <% @pet_adopt_forms.each do |form| %>
-    <%= link_to "#{form.pet.name}", "/pets/#{form.pet.id}" %>
+      <p><%= link_to "#{form.pet.name}", "/pets/#{form.pet.id}" %></p>
   <% end %>
 </section>
