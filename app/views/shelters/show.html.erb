@@ -1,6 +1,9 @@
 <main>
   <h2><%= @shelter.name %></h2>
   <p><%= "Address: #{@shelter.address} #{@shelter.city}, #{@shelter.state} #{@shelter.zip}" %></p>
+  <p>Number of Pets: <%= @shelter.num_pets %></p>
+  <p>Average Review Score: <%= @shelter.avg_score %></p>
+  <p>Number of Applications for Pets in this Shelter: <%= @shelter.num_apps %></p>
   <%= link_to "Shelter's Pets", "/shelters/#{@shelter.id}/pets" %>
   <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit" %>
   <%= link_to "Delete Shelter", "/shelters/#{@shelter.id}/", method: :delete %>

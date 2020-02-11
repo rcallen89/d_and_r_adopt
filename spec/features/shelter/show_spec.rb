@@ -49,4 +49,35 @@ RSpec.describe 'As a visitor of a shelter show page' do
     
     expect(page).to have_link("Edit Review", count: @shelter1.reviews.count)
   end
+
+  it 'should show number of pets in shelter' do
+    pet1 = create(:pet, shelter: @shelter1)
+    visit "/shelters/#{@shelter1.id}"
+    expect(page).to have_content("Number of Pets: 1")
+
+    pet2 = create(:pet, shelter: @shelter1)
+    visit "/shelters/#{@shelter1.id}"
+    expect(page).to have_content("Number of Pets: 2")
+  end
+  it 'should show average review score' do
+    review3 = create(:review, shelter: @shelter1, rating: 2)
+    visit "/shelters/#{@shelter1.id}"
+    
+    expect(page).to have_content("Average Review Score: 3")
+  end
+  it 'should show number of apps for pets in shelter' do
+    pet1 = create(:pet, shelter: @shelter1)
+    pet2 = create(:pet, shelter: @shelter1)
+
+    adopt_form1 = create(:adopt_form)
+    create(:pet_adopt_form, adopt_form: adopt_form1, pet: pet1)
+    adopt_form2 = create(:adopt_form)
+    create(:pet_adopt_form, adopt_form: adopt_form2, pet: pet1)
+    adopt_form3 = create(:adopt_form)
+    create(:pet_adopt_form, adopt_form: adopt_form3, pet: pet2)
+    
+    visit "/shelters/#{@shelter1.id}"
+    
+    expect(page).to have_content("Number of Applications for Pets in this Shelter: 3")
+  end
 end
