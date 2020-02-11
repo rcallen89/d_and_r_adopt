@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   def create
     @shelter = Shelter.find(params[:shelter_id])
 
-    params.delete :image if ( (params[:image].blank? || has_asset?(params[:image])) )
+    params.delete :image if ( (params[:image].blank?))
     review = Review.new(review_params)
     if review.save
       redirect_to "/shelters/#{params[:shelter_id]}"
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:review_id])
 
-    params.delete :image if ( (params[:image].blank? || has_asset?(params[:image])) )
+    params.delete :image if ( (params[:image].blank?) )
 
     if @review.update(review_params)
       redirect_to "/shelters/#{params[:shelter_id]}"

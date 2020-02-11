@@ -68,7 +68,7 @@ RSpec.describe 'Shelter Review Functions', type: :feature do
       fill_in "title", with: "New Review 1"
       fill_in "rating", with: "5"
       fill_in "content", with: "Lovely Pet Shelter"
-      fill_in "image", with: "test"
+      fill_in "image", with: ""
 
       click_on "Submit Review"
 

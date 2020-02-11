@@ -31,7 +31,7 @@ RSpec.describe 'As a visitor' do
 
     visit "/shelters/#{shelter.id}"
 
-    click_on "Delete Shelter"
+    expect { click_link 'Delete Shelter' }.to change(Shelter && Pet, :count).by(-1)
 
     expect(current_path).to eq("/shelters")
     expect(page).to have_content("Shelter Deleted")
@@ -43,7 +43,7 @@ RSpec.describe 'As a visitor' do
 
     visit "/shelters/#{shelter.id}"
 
-    click_on "Delete Shelter"
+    expect { click_link 'Delete Shelter' }.to change(Shelter && Review, :count).by(-1)
 
     expect(current_path).to eq("/shelters")
     expect(page).to have_content("Shelter Deleted")
