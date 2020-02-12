@@ -7,7 +7,7 @@
   <p>Sex: <%= @pet.sex %></p>
   <p>Status: <%= @pet.adoptable %></p>
   <% if @pet.adoptable == "Pending" %>
-    <p>On hold for <%= @pet.pending_form %></p>
+    <p>On hold for <%= link_to "#{@pet.pending_form}", "/adopt_forms/#{@pet.pending_app}" %></p>
   <% end %>
 
   <%= link_to "Update Pet", "/pets/#{@pet.id}/edit"%>

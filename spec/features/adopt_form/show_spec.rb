@@ -107,7 +107,8 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
       expect(current_path).to eq("/pets/#{@pet1.id}")
 
       expect(page).to have_content("Status: Pending")
-      expect(page).to have_content("On hold for #{@adopt_form1.name}")
+      expect(page).to have_content("On hold for")
+      expect(page).to have_link("#{@adopt_form1.name}")
 
       visit "/adopt_forms/#{@adopt_form1.id}"
 
@@ -122,7 +123,7 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
       end
 
       visit "/pets/#{@pet1.id}"
-
+      
       expect(page).to have_content("Status: Available")
       expect(page).not_to have_content("On hold for")
     end
