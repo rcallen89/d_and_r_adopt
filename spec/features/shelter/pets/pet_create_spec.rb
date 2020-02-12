@@ -25,4 +25,21 @@ RSpec.describe 'As a visitor to a shelters pets index page', type: :feature do
     expect(page).to have_content(2)
     expect(page).to have_content("Male")
   end
+
+  it 'should show an error for missing information' do
+    visit "/shelters/#{@shelter1.id}/pets"
+    expect(page).to_not have_content("Tron")
+
+    click_on "Create Pet"
+    expect(current_path).to eq("/shelters/#{@shelter1.id}/pets/new")
+
+    fill_in :approximate_age, with: 2
+    fill_in :description, with: "Too Cool for School"
+
+    click_on "Create Pet"
+
+    expect(current_path).to eq("/shelters/#{@shelter1.id}/pets/new")
+    
+    expect(page).to have_content("Name can't be blank and Sex can't be blank")
+  end
 end

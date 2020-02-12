@@ -40,4 +40,19 @@ RSpec.describe 'As a visitor to a pets show page', type: :feature do
     expect(page).to_not have_content("Male")
     expect(page).to_not have_content("Too Cool for School")
   end
+
+  it 'should show an error message for missing information of pet' do
+    visit "/pets/#{@pet1.id}/edit"
+
+    fill_in :name, with: "Kat"
+    fill_in :approximate_age, with: 4
+    fill_in :sex, with: ""
+    fill_in :description, with: "Too Hot for TV"
+
+    click_on "Update Pet"
+
+    expect(current_path).to eq("/pets/#{@pet1.id}/edit")
+
+    expect(page).to have_content("Sex can't be blank")
+  end
 end
