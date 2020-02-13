@@ -15,7 +15,7 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
     it 'can view the adopt form info with links to pets in it' do
       visit "/adopt_forms/#{@adopt_form1.id}"
 
-      expect(page).to have_content("Sally")
+      expect(page).to have_link("Sally")
       expect(page).to have_content("1234 Main St.")
       expect(page).to have_content("Denver")
       expect(page).to have_content("CO")
@@ -50,7 +50,7 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
     it 'each pet in the app has an approval link' do
       visit "/adopt_forms/#{@adopt_form2.id}"
 
-      expect(page).to have_content("Becky")
+      expect(page).to have_link("Becky")
       expect(page).to have_content("1234 Main St.")
       expect(page).to have_content("Denver")
       expect(page).to have_content("CO")
@@ -92,7 +92,6 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
     it 'pet adoption can be revoked, status returns to pending' do
       visit "/adopt_forms/#{@adopt_form1.id}"
 
-      expect(page).to have_content("Sally")
       expect(page).to have_content("1234 Main St.")
       expect(page).to have_content("Denver")
       expect(page).to have_content("CO")
@@ -107,7 +106,8 @@ RSpec.describe 'Adopt Form Show Page', type: :feature do
       expect(current_path).to eq("/pets/#{@pet1.id}")
 
       expect(page).to have_content("Status: Pending")
-      expect(page).to have_content("On hold for #{@adopt_form1.name}")
+      expect(page).to have_content("On hold for")
+      expect(page).to have_link("#{@adopt_form1.name}")
 
       visit "/adopt_forms/#{@adopt_form1.id}"
 

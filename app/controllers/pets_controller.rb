@@ -12,9 +12,14 @@ class PetsController < ApplicationController
   end
 
   def update
-    pet = Pet.find(params[:id])
-    pet.update(pet_params)
-    redirect_to "/pets/#{pet.id}"
+    @pet = Pet.find(params[:id])
+    # params.delete_if { |param, value| value.blank? }
+    if @pet.update(pet_params)
+      redirect_to "/pets/#{@pet.id}"
+    else
+      flash[:error] = @pet.errors.full_messages.to_sentence
+      redirect_to "/pets/#{@pet.id}/edit"
+    end
   end
 
   def destroy

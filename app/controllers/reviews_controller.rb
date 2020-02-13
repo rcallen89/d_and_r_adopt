@@ -45,8 +45,4 @@ class ReviewsController < ApplicationController
       params.permit(:title, :rating, :content, :image, :shelter_id)
     end
 
-    def has_asset?(image)
-      Rails.application.assets.find_asset(image) == nil
-    end
-
 end

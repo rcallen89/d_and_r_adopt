@@ -1,4 +1,4 @@
-<h2>Applications for <%= @pet.name %></h2>
+<h2>Applications for <%= link_to "#{@pet.name}", "/pets/#{@pet.id}" %></h2>
 
 <% if @pet.adopt_forms.count > 0 %>
   <%= content_tag :ul do %>
@@ -7,5 +7,5 @@
   <% end %>
 <% end %>
 <% else %>
-  <p>There are no applications for <%= @pet.name %> at this time.</p>
+  <p>There are no applications for <%= link_to "#{@pet.name}", "/pets/#{@pet.id}" %> at this time.</p>
 <% end %>

@@ -1,6 +1,6 @@
-<h2><%= @form.name %>'s Application</h2>
+<h2><%= link_to "#{@form.name}'s", "/adopt_forms/#{@form.id}" %> Application</h2>
 
-<p>Name: <%= @form.name %></p>
+<p>Name: <%= link_to "#{@form.name}", "/adopt_forms/#{@form.id}" %></p>
 <p>Address: <%= @form.address %>, <%= @form.city %>, <%= @form.state %> <%= @form.zip %></p>
 <p>Phone Number: <%= @form.phone_number %></p>
 <p>Description: <%= @form.description %></p>
