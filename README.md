@@ -36,3 +36,7 @@ There are no different user levels so all visitors can do the following:
 ## Production
 * The production side is located at https://d-and-r-adopt.herokuapp.com/shelters
 
+## Contributors
+* Ryan Allen - https://github.com/rcallen89
+* DeMarcus Kirby - https://github.com/kirbydd
+
